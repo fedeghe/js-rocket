@@ -1,0 +1,14 @@
+{
+    "name": "js-rocket",
+    "version": "0.0.0",
+    "description": "A collection of methods to achieve common & less common actions in the fastest possible way",
+    "main": "index.js",
+    "repository": "https://github.com/fedeghe/js-rocket.git",
+    "author": "fedeghe <fedeghe@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {},
+    "scripts": {
+        "test": "node tests/*.js"
+    }
+}
