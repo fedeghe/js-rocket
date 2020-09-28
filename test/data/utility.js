@@ -18,14 +18,29 @@ const check = (name, res) => {
     })
 }
 
+const Reset = "\x1b[0m"
+const FgRed = "\x1b[31m"
+const FgGreen = "\x1b[32m"
+
 const showPerf = (perf) => {
-    Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1).forEach(k => {
-        console.log(`${k}: ~${perf[k]}ms`)
+    const p = Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1),
+        l = p.length;
+    p.forEach((k, i) => {
+        let pre = false;
+        if (i == 0) {   
+            pre = `${FgGreen}%s${Reset}`;
+        }
+        if (i == l - 1) {   
+            pre = `${FgRed}%s${Reset}`;
+        }
+        pre
+        ? console.log(pre, `${k}: ~${perf[k]}ms`)
+        : console.log(`${k}: ~${perf[k]}ms`)
     })
 }
 
-const times = 1e3,
-    size = 1e4,
+const times = 1e4,
+    size = 1e3,
     arr = arrayOf(size, i => i * 2);
 
 const doPerf = {
