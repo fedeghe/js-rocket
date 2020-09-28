@@ -1,6 +1,5 @@
 const assert = require('assert');
     
-
 const arrayOf = (n, fn) => new Array(n).fill().map((_, i) => fn(i));
 
 const check = (name, res) => {
@@ -19,6 +18,12 @@ const check = (name, res) => {
     })
 }
 
+const showPerf = (perf) => {
+    Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1).forEach(k => {
+        console.log(`${k}: ~${perf[k]}ms`)
+    })
+}
 
+exports.showPerf = showPerf;
 exports.arrayOf = arrayOf;
 exports.check = check;
