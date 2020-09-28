@@ -9,6 +9,9 @@
     "private": true,
     "dependencies": {},
     "scripts": {
-        "test": "node tests/*.js"
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "mocha": "^8.1.3"
     }
 }

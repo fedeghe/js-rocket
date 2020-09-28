@@ -5,6 +5,11 @@ function slice() {
 function concat() {
     return [].concat.apply([], arguments);
 }
+function pushApply() {
+    var a = [];
+    [].push.apply(a, arguments);
+    return a
+}
 
 function forLoop() {
     var res = [];
@@ -22,3 +27,4 @@ exports.slice = slice;
 exports.concat = concat;
 exports.forLoop = forLoop;
 exports.map = map;
+exports.pushApply = pushApply;
