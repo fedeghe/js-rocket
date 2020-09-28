@@ -24,48 +24,47 @@ const showPerf = (perf) => {
     })
 }
 
-const doPerfStraigth = (strategies, filename) => {
-    const times = 1e3,
-        size = 1e4,
-        arr = arrayOf(size, i => i * 2),
-        res = {},
-        perf = {};
+const times = 1e3,
+    size = 1e4,
+    arr = arrayOf(size, i => i * 2);
 
-    console.log(`\nTEST ${filename}`)
+const doPerf = {
+    straigth: (strategies, filename) => {
+        const res = {},
+            perf = {};
 
-    for(strategy in strategies){
-        let i = 0,
-            start = +new Date;
-        while(i++ < times) {
-            res[strategy] = strategies[strategy](arr)
+        console.log(`\nTEST ${filename}`)
+
+        for(strategy in strategies){
+            let i = 0,
+                start = +new Date;
+            while(i++ < times) {
+                res[strategy] = strategies[strategy](arr)
+            }
+            var end = + new Date
+            perf[strategy] = end-start
         }
-        var end = + new Date
-        perf[strategy] = end-start
-    }
-    showPerf(perf);
-    check(filename, res);
-};
-const doPerfApply = (strategies, filename) => {
-    const times = 1e3,
-        size = 1e4,
-        arr = arrayOf(size, i => i * 2),
-        res = {},
-        perf = {};
+        showPerf(perf);
+        check(filename, res);
+    },
+    apply: (strategies, filename) => {
+        const res = {},
+            perf = {};
 
-    console.log(`\nTEST ${filename}`)
+        console.log(`\nTEST ${filename}`)
 
-    for (strategy in strategies){
-        let i = 0,
-            start = +new Date;
-        while(i++ < times) {
-            res[strategy] = strategies[strategy].apply(null, arr)
+        for (strategy in strategies){
+            let i = 0,
+                start = +new Date;
+            while(i++ < times) {
+                res[strategy] = strategies[strategy].apply(null, arr)
+            }
+            var end = + new Date
+            perf[strategy] = end-start
         }
-        var end = + new Date
-        perf[strategy] = end-start
+        showPerf(perf);
+        check(filename, res);
     }
-    showPerf(perf);
-    check(filename, res);
 };
 
-exports.doPerfStraigth = doPerfStraigth;
-exports.doPerfApply = doPerfApply;
+exports.doPerf= doPerf;
