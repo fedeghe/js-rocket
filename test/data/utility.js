@@ -42,6 +42,10 @@ const Reset = "\x1b[0m",
     times = 1e4,
     size = 1e3,
     arr = arrayOf(size, i => i * 2),
+    arrFunc = [
+        s => 2**3,
+        a => a[0]*a[1]*a[2]
+    ],
     doPerf = {
         straigth: (strategies, filename) => {
             const res = {},
@@ -72,6 +76,24 @@ const Reset = "\x1b[0m",
                     start = +new Date;
                 while(i++ < times) {
                     res[strategy] = strategies[strategy].apply(null, arr)
+                }
+                var end = + new Date
+                perf[strategy] = end-start
+            }
+            showPerf(perf);
+            check(filename, res);
+        },
+        straightFunc: (strategies, filename) => {
+            const res = {},
+                perf = {};
+
+            console.log(`\nTEST ${filename}`)
+
+            for (strategy in strategies){
+                let i = 0,
+                    start = +new Date;
+                while(i++ < times) {
+                    res[strategy] = strategies[strategy].apply(null, arrFunc)(1, 2, 3)
                 }
                 var end = + new Date
                 perf[strategy] = end-start
