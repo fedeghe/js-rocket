@@ -52,7 +52,7 @@ const Reset = "\x1b[0m",
         check(filename, res);
     }
     doPerf = {
-        straigth: (strategies, filename) => {
+        straight: (strategies, filename) => {
             const res = {},
                 perf = {};
             for(strategy in strategies){
