@@ -13,10 +13,16 @@ function straightWhile(a) {
     while (++i < l) {
         s += a[i]
     }
-    // s += 20
     return s
+}
+
+function reduce(a) {
+    return a.reduce(function (acc, e) {
+        return acc + e
+    }, 0)
 }
 
 
 exports.straightFor = straightFor;
 exports.straightWhile = straightWhile;
+exports.reduce = reduce;

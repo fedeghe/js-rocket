@@ -1,3 +1,13 @@
+function compose() {
+    var args = arguments,
+        start = args.length - 1;
+    return function() {
+        var i = start,
+            result = args[start].apply(this, arguments);
+        while (i--) result = args[i].call(this, result);
+        return result;
+    };
+};
 function compose1() {
     var args = arguments,
         start = args.length - 1;
@@ -9,7 +19,7 @@ function compose1() {
     };
 };
 
-function compose2() {
+function compose2(aaaa) {
     var args = [].slice.call(arguments),
         l = args.length;
     return function () {

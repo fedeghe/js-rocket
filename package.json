@@ -7,7 +7,6 @@
     "author": "fedeghe <fedeghe@gmail.com>",
     "license": "MIT",
     "private": true,
-    "dependencies": {},
     "scripts": {
         "test": "mocha"
     },
