@@ -4,7 +4,7 @@ const arrayOf = (n, fn) => new Array(n).fill().map((_, i) => fn(i));
 
 const check = (name, res) => {
     describe(name, () => {
-        it('should have same result', () => {
+        it('all strategies should have same result', () => {
             let r = null
             for (var strategy in res) {
                 if (!r) {
@@ -19,7 +19,10 @@ const check = (name, res) => {
 };
 
 const showPerf = (perf) => {
-    const p = Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1),
+    const Reset = "\x1b[0m",
+        FgRed = "\x1b[31m",
+        FgGreen = "\x1b[32m",
+        p = Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1),
         l = p.length;
     p.forEach((k, i) => {
         let pre = false;
@@ -36,10 +39,7 @@ const showPerf = (perf) => {
 };
 
 
-const Reset = "\x1b[0m",
-    FgRed = "\x1b[31m",
-    FgGreen = "\x1b[32m",
-    times = 1e4,
+const times = 1e4,
     size = 1e3,
     arr = arrayOf(size, i => i * 2),
     arrFunc = [
