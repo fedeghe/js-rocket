@@ -14,6 +14,8 @@ A collection of methods to achieve common & less common actions in the fastest p
 - filter
 - map
 - reduce
+- some
+- every
 
 ---
 
