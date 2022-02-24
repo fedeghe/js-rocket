@@ -19,5 +19,12 @@ function compose2() {
     }   
 }
 
+const compose3 = (...args) => (...a) => args.reduceRight(
+    (acc, fn) => fn.call(null, acc),
+    a
+)
+
+
 exports.compose1 = compose1;
 exports.compose2 = compose2;
+exports.compose3 = compose3;

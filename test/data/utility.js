@@ -26,8 +26,7 @@ const showPerf = (perf) => {
         l = p.length,
         fasterK = p[0],
         fasterV = perf[fasterK];
-    // console.log(perf)
-    // console.log(p)
+
     p.forEach((k, i) => {
         let pre = false,
             post = 'fastest';
@@ -40,8 +39,8 @@ const showPerf = (perf) => {
             pre = `${FgRed}%s${Reset}`;
         }
         pre
-        ? console.log(pre, `${k}: ~${perf[k]}ms ${post}`)
-        : console.log(`${k}: ~${perf[k]}ms ${post}`)
+        ? console.log(pre, `${k}: ~${(perf[k]*1e3).toFixed(1)}µs ${post}`)
+        : console.log(`${k}: ~${(perf[k]*1e3).toFixed(1)}µs ${post}`)
     })
 };
 
@@ -64,40 +63,45 @@ const times = 1e4,
                 perf = {};
             for(strategy in strategies){
                 let i = 0,
-                    start = +new Date;
+                    start = +new Date,
+                    end;
                 while(i++ < times) {
                     res[strategy] = strategies[strategy](arr)
                 }
-                var end = + new Date
-                perf[strategy] = end-start
+                end = + new Date
+                perf[strategy] = (end - start) / times
             }
             report(filename, perf, res);
         },
+
         apply: (strategies, filename) => {
             const res = {},
                 perf = {};
             for (strategy in strategies){
                 let i = 0,
-                    start = +new Date;
+                    start = +new Date,
+                    end;
                 while(i++ < times) {
                     res[strategy] = strategies[strategy].apply(null, arr)
                 }
-                var end = + new Date
-                perf[strategy] = end-start
+                end = + new Date
+                perf[strategy] = (end - start) / times
             }
             report(filename, perf, res);
         },
+
         straightFunc: (strategies, filename) => {
             const res = {},
                 perf = {};
             for (strategy in strategies){
                 let i = 0,
-                    start = +new Date;
+                    start = +new Date,
+                    end;
                 while(i++ < times) {
                     res[strategy] = strategies[strategy].apply(null, arrFunc).apply(null, arr)
                 }
-                var end = + new Date
-                perf[strategy] = end-start
+                end = + new Date
+                perf[strategy] = (end - start) / times
             }
             report(filename, perf, res);
         }
