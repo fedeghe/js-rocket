@@ -23,18 +23,25 @@ const showPerf = (perf) => {
         FgRed = "\x1b[31m",
         FgGreen = "\x1b[32m",
         p = Object.keys(perf).sort((a, b) => perf[a] > perf[b] ? 1 : -1),
-        l = p.length;
+        l = p.length,
+        fasterK = p[0],
+        fasterV = perf[fasterK];
+    // console.log(perf)
+    // console.log(p)
     p.forEach((k, i) => {
-        let pre = false;
+        let pre = false,
+            post = 'fastest';
         if (i == 0) {   
             pre = `${FgGreen}%s${Reset}`;
+        } else {
+            post = `~${~~(perf[k]/fasterV)}X slower`
         }
         if (i == l - 1) {   
             pre = `${FgRed}%s${Reset}`;
         }
         pre
-        ? console.log(pre, `${k}: ~${perf[k]}ms`)
-        : console.log(`${k}: ~${perf[k]}ms`)
+        ? console.log(pre, `${k}: ~${perf[k]}ms ${post}`)
+        : console.log(`${k}: ~${perf[k]}ms ${post}`)
     })
 };
 

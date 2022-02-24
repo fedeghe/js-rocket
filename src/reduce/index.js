@@ -11,7 +11,7 @@ Array.prototype.redu = function(fn, init){
 function reduce(a) {
     return a.reduce(function (acc, el) { return acc + el }, 0);
 }
-function reduceOverridden(a) {
+function reducePolluted(a) {
     return a.redu(function (acc, el) { return acc + el }, 0);
 }
 
@@ -46,5 +46,5 @@ function escapableReduceWithFor(arr, fn = (a,e) => a+e, init = 0, exitFn) {
 exports.reduce = reduce;
 exports.reduceWithFor = reduceWithFor;
 exports.reduceWithWhile = reduceWithWhile;
-exports.reduceOverridden = reduceOverridden;
+exports.reducePolluted = reducePolluted;
 exports.escapableReduceWithFor = escapableReduceWithFor;
