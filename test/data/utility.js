@@ -34,7 +34,7 @@ const showPerf = (perf) => {
         if (i == 0) {   
             pre = `${FgGreen}%s${Reset}`;
         } else {
-            post = `~${~~(perf[k]/fasterV)}X slower`
+            post = `~${(perf[k]/fasterV).toFixed(1)}X slower`
         }
         if (i == l - 1) {   
             pre = `${FgRed}%s${Reset}`;
