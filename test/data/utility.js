@@ -5,7 +5,7 @@ const arrayOf = (n, fn) => new Array(n).fill().map((_, i) => fn(i));
 const check = (name, res) => {
     describe(name, () => {
         it('all strategies should have same result', () => {
-            let r = null
+            let r = null;
             for (var strategy in res) {
                 if (!r) {
                     r = JSON.stringify(res[strategy])
@@ -44,12 +44,11 @@ const showPerf = (perf) => {
     })
 };
 
-
 const times = 1e4,
     size = 1e3,
     arr = arrayOf(size, i => i * 2),
     arrFunc = [
-        s => 2 ** 3,
+        () => 2 ** 3,
         a => [].concat(a).reduce((acc, el) => acc + el, 0)
     ],
     report = (filename, perf, res) => {
@@ -57,7 +56,7 @@ const times = 1e4,
         showPerf(perf);
         check(filename, res);
     },
-    s = {
+    modes = {
         straight : strat => strat(arr),
         appl : strat => strat.apply(null, arr),
         straightFunc : strat => strat.apply(null, arrFunc).apply(null, arr),
@@ -65,15 +64,18 @@ const times = 1e4,
     doPerf = (strat, strategies, filename) => {
         const res = {},
             perf = {},
-            exec = s[strat];
+            exec = modes[strat];
         for(strategy in strategies){
             let i = 0,
                 start = +new Date,
-                end;
-            while(i++ < times) {
-                res[strategy] = exec(strategies[strategy])
-            }
-            end = + new Date
+                end,
+                what = strategies[strategy];
+            res[strategy] = exec(what); // first
+
+            // for the remaining just run for the sake of tracking exec time
+            while(i++ < times - 1) exec(what);
+
+            end = + new Date;
             perf[strategy] = (end - start) / times
         }
         report(filename, perf, res);
