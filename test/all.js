@@ -9,8 +9,8 @@ const arguments2array = require('../src/arguments2array'),
     { doPerf } = require('./data/utility.js');
 
 doPerf('appl', arguments2array, 'arguments2array');
-doPerf('straight',arrayLoop, 'arrayLoop');
-doPerf('straightFunc',compose, 'compose');
+doPerf('straight', arrayLoop, 'arrayLoop');
+doPerf('straightFunc', compose, 'compose');
 doPerf('straight', every, 'every');
 doPerf('straight', filter, 'filter');
 doPerf('straight', map, 'map');
