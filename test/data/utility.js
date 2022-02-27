@@ -64,13 +64,14 @@ const times = 1e4,
     },
     doPerf = (strat, strategies, filename) => {
         const res = {},
-            perf = {};
+            perf = {},
+            exec = s[strat];
         for(strategy in strategies){
             let i = 0,
                 start = +new Date,
                 end;
             while(i++ < times) {
-                res[strategy] = s[strat](strategies[strategy])
+                res[strategy] = exec(strategies[strategy])
             }
             end = + new Date
             perf[strategy] = (end - start) / times
