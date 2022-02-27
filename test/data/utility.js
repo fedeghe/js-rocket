@@ -56,55 +56,26 @@ const times = 1e4,
         console.log(`\nTEST ${filename}`)
         showPerf(perf);
         check(filename, res);
-    }
-    doPerf = {
-        straight: (strategies, filename) => {
-            const res = {},
-                perf = {};
-            for(strategy in strategies){
-                let i = 0,
-                    start = +new Date,
-                    end;
-                while(i++ < times) {
-                    res[strategy] = strategies[strategy](arr)
-                }
-                end = + new Date
-                perf[strategy] = (end - start) / times
+    },
+    s = {
+        straight : strat => strat(arr),
+        appl : strat => strat.apply(null, arr),
+        straightFunc : strat => strat.apply(null, arrFunc).apply(null, arr),
+    },
+    doPerf = (strat, strategies, filename) => {
+        const res = {},
+            perf = {};
+        for(strategy in strategies){
+            let i = 0,
+                start = +new Date,
+                end;
+            while(i++ < times) {
+                res[strategy] = s[strat](strategies[strategy])
             }
-            report(filename, perf, res);
-        },
-
-        apply: (strategies, filename) => {
-            const res = {},
-                perf = {};
-            for (strategy in strategies){
-                let i = 0,
-                    start = +new Date,
-                    end;
-                while(i++ < times) {
-                    res[strategy] = strategies[strategy].apply(null, arr)
-                }
-                end = + new Date
-                perf[strategy] = (end - start) / times
-            }
-            report(filename, perf, res);
-        },
-
-        straightFunc: (strategies, filename) => {
-            const res = {},
-                perf = {};
-            for (strategy in strategies){
-                let i = 0,
-                    start = +new Date,
-                    end;
-                while(i++ < times) {
-                    res[strategy] = strategies[strategy].apply(null, arrFunc).apply(null, arr)
-                }
-                end = + new Date
-                perf[strategy] = (end - start) / times
-            }
-            report(filename, perf, res);
+            end = + new Date
+            perf[strategy] = (end - start) / times
         }
+        report(filename, perf, res);
     };
 
 exports.doPerf= doPerf;
