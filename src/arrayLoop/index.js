@@ -15,6 +15,11 @@ function straightWhile(a) {
     }
     return s
 }
+function invertedWhile(a) {
+    var l = a.length, s = 0;
+    while (--l) s += a[l]
+    return s
+}
 
 function reduce(a) {
     return a.reduce(function (acc, e) {
@@ -25,4 +30,5 @@ function reduce(a) {
 
 exports.straightFor = straightFor;
 exports.straightWhile = straightWhile;
+exports.invertedWhile = invertedWhile;
 exports.reduce = reduce;

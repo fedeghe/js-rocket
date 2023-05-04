@@ -23,4 +23,4 @@ Actual numbers will surprise you! ... still using `Array.reduce` ?
 
 If still u are using a lot `Array.reduce` and I did not convinced you, please take the time to clone react code and search for `.reduce` in the _packages_ folder.
 
-![numbers](https://raw.githubusercontent.com/fedeghe/js-rocket/master/src/img/numbers.png)
+![numbers](https://raw.githubusercontent.com/fedeghe/js-rocket/master/src/img/numbers2.png)
