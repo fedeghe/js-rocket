@@ -6,6 +6,7 @@ const arguments2array = require('../src/arguments2array'),
     map = require('../src/map'),
     reduce = require('../src/reduce'),
     some = require('../src/some'),
+    remFromObj = require('../src/removeFromObject'),
     { doPerf } = require('./data/utility.js');
 
 doPerf('appl', arguments2array, 'arguments2array');
@@ -16,3 +17,4 @@ doPerf('straight', filter, 'filter');
 doPerf('straight', map, 'map');
 doPerf('straight', reduce, 'reduce');
 doPerf('straight', some, 'some');
+doPerf('straight', remFromObj, 'remFromObj');
